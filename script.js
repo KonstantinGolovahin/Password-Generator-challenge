@@ -88,18 +88,100 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
-function getPasswordOptions() {
 
+///////////////////////////////////////////////////
+//Application logic
+  //Receive password parameters and validate if
+    // user input has a valid number between 10 and 64
+    // user selected at least one option of character's arrays to use
+  // if any condition not satisfied - ask to resubmit password generation criteria
+  // if correct criteria received - create a new array containing valid characters from existing arrays
+  //generate a password from random characters
+  // Output result
+
+
+/////////////////////////////////////////////
+
+// Starter values for defining generation options
+var hasLowerCase ;
+var hasUpperCase ;
+var hasNumericCharacter ;
+var hasSpecialCharacter ;
+var passwordLength;
+
+// temporary array for calculations
+var tempArray=[];
+// Generated password
+var passwordOutput ="";
+// check if at least one data source array is selected
+validateSourceData = false;
+
+// text strings for user prompts
+const promptLenghtText = "Please enter desired length from 10 to 64 inclusive";
+const promptLowerCaseText = "Would you like to include lowrcase characters? Y - to accept lowercase characters";
+const promptUpperCaseText = "Would you like to include uppercase characters? Y - to accept uppercase characters";
+const prompNumericText = "Would you like to include numeric characters? Y - to accept numeric characters";
+const promptSpecialCharactersText = "Would you like to include special characters? Y - to accept Special characters";
+
+
+///////////////////////////////functions //////////////////////////
+
+// function to clear previus password
+function clearPreviousPassword(){
+  validateSourceData = false;
+  tempArray=[];
+  passwordOutput="";
+}
+
+// Function to prompt user for password options
+function getPasswordOptions(promptText) {
+let userSelection=prompt(promptText);
+return userSelection;
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  
+ let randomChar=  Math.floor(Math.random() * arr.length);
+   return arr[randomChar];
 }
 
 // Function to generate password with user input
-function generatePassword() {
+function generatePassword(passwordOutput) {
+
+// clear previous entries
+clearPreviousPassword();
+
+
+// get desired password length
+  passwordLength=getPasswordOptions(promptLenghtText);
+
+  // do not allow to input incorrect values or ignore password length
+  while (isNaN(passwordLength)|| passwordLength<10 || passwordLength>64 ||passwordLength ==" "){
+    passwordLength=getPasswordOptions(promptLenghtText);
+  }
+  
+  // do not proceed until at least one data source is selected
+  while(!validateSourceData){
+    validateSource();
+  }
+  
+  
+  // get a random character from a temporary array keeping in mind that first charcter cannot be concatenated to a previous value
+  for (i=0;i<passwordLength;i++) {
+    
+    if(i===0) {
+      passwordOutput= getRandom(tempArray);
+      
+    }
+    else{
+      passwordOutput=passwordOutput+getRandom(tempArray);
+      
+    }
+    
+  }
+// provide a final result as a string for future output
+return passwordOutput;
 
 }
 
@@ -114,5 +196,59 @@ function writePassword() {
   passwordText.value = password;
 }
 
+
+// loop prompts for selecting data source
+function validateSource(){
+
+// Add lowercase array 
+hasLowerCase=getPasswordOptions(promptLowerCaseText);
+// checks if user pressed cancel button
+if(hasLowerCase!=null) {
+  // checks if user selected valid option
+  if(hasLowerCase.toUpperCase()==="Y" ) {
+    tempArray=lowerCasedCharacters;
+    validateSourceData=true;
+  }
+}
+
+// Add uppercase array
+hasUpperCase=getPasswordOptions(promptUpperCaseText);
+if(hasUpperCase!=null){
+  if(hasUpperCase.toUpperCase()==="Y") {
+    tempArray=tempArray.concat(upperCasedCharacters);
+    validateSourceData=true;
+    }
+}
+
+// Add numeric array
+hasNumericCharacter=getPasswordOptions(prompNumericText);
+if(hasNumericCharacter!=null){
+  if(hasNumericCharacter.toUpperCase()==="Y") {
+    tempArray=tempArray.concat(numericCharacters);
+    validateSourceData=true;
+   }
+}
+
+// Add special array
+hasSpecialCharacter=getPasswordOptions(promptSpecialCharactersText);
+if(hasSpecialCharacter!=null){
+  if(hasSpecialCharacter.toUpperCase()==="Y") {
+    tempArray=tempArray.concat(specialCharacters);
+    validateSourceData=true;
+   }
+}
+
+
+
+}
+
+////////////////////////// buttons /////////////////////////
+
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+
+
+//console.log(passwordLength);
+//console.log(passwordOutput);
+//console.log(tempArray);
