@@ -94,7 +94,7 @@ var upperCasedCharacters = [
   //Receive password parameters and validate if
     // user input has a valid number between 10 and 64
     // user selected at least one option of character's arrays to use
-  // if any condition not satisfied - ask to resubmit password generation criteria
+  // if any condition not satisfied - ask to resubmit password generation criteria - keep asking until a result is received
   // if correct criteria received - create a new array containing valid characters from existing arrays
   //generate a password from random characters
   // Output result
@@ -118,10 +118,10 @@ validateSourceData = false;
 
 // text strings for user prompts
 const promptLenghtText = "Please enter desired length from 10 to 64 inclusive";
-const promptLowerCaseText = "Would you like to include lowrcase characters? Y - to accept lowercase characters";
-const promptUpperCaseText = "Would you like to include uppercase characters? Y - to accept uppercase characters";
-const prompNumericText = "Would you like to include numeric characters? Y - to accept numeric characters";
-const promptSpecialCharactersText = "Would you like to include special characters? Y - to accept Special characters";
+const promptLowerCaseText = "Would you like to include lowrcase characters? Y - to allow lowercase characters";
+const promptUpperCaseText = "Would you like to include uppercase characters? Y - to allow uppercase characters";
+const prompNumericText = "Would you like to include numeric characters? Y - to accept allow characters";
+const promptSpecialCharactersText = "Would you like to include special characters? Y - to allow special characters";
 
 
 ///////////////////////////////functions //////////////////////////
@@ -199,6 +199,9 @@ function writePassword() {
 
 // loop prompts for selecting data source
 function validateSource(){
+
+
+
 
 // Add lowercase array 
 hasLowerCase=getPasswordOptions(promptLowerCaseText);

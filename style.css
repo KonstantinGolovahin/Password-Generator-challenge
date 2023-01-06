@@ -30,6 +30,19 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+ /* user instructions section */
+#userInstructions {
+  font-weight: bolder;
+  border-color: black;
+  border-width: 1px;
+  border-style: double;
+}
+
+
+p{
+  text-align: center;
+}
+
 .card {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
