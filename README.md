@@ -2,7 +2,7 @@
 
 ## Description
  
-This website was created for boot camp as a challange 5 for WC 01/01/2023. It is required to create an application that an employee can use to generate a random password based on criteria they’ve selected by modifying starter code.
+This website was created for boot camp as a challenge 5 for WC 01/01/2023. It is required to create an application that an employee can use to generate a random password based on criteria they’ve selected by modifying starter code.
 
 ## Grading Requirements
 
@@ -59,11 +59,11 @@ This homework is graded based on the following criteria:
 
 ## Screenshot - add new
 
-![Console Finances](./images/Screenshot.png?raw=true "Console Finances")
+![Password generator](./images/Screenshot.png?raw=true "Password generator")
 
 ## Link to deployed application - add new
 
-https://konstantingolovahin.github.io/Console-Finances/
+https://konstantingolovahin.github.io/Password-Generator-challenge/
 
 ## Installation
 

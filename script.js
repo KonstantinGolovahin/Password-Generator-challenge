@@ -1,3 +1,20 @@
+
+/////////////////////////////////////////////////// Application logic //////////////////////////////
+
+  //Receive password parameters and validate if
+    // user input has a valid number between 10 and 64
+    // user selected at least one option of character's arrays to use
+  // if any condition not satisfied - ask to resubmit password generation criteria - keep asking until a valid result is received
+  // if correct criteria received - create a new array containing valid characters from existing arrays
+  //generate a password from random characters
+  // Output result
+
+
+
+
+///////////////////////// Data source ///////////////////////////
+
+
 // Array of special characters to be included in password
 var specialCharacters = [
   '@',
@@ -89,18 +106,9 @@ var upperCasedCharacters = [
 ];
 
 
-///////////////////////////////////////////////////
-//Application logic
-  //Receive password parameters and validate if
-    // user input has a valid number between 10 and 64
-    // user selected at least one option of character's arrays to use
-  // if any condition not satisfied - ask to resubmit password generation criteria - keep asking until a result is received
-  // if correct criteria received - create a new array containing valid characters from existing arrays
-  //generate a password from random characters
-  // Output result
 
 
-/////////////////////////////////////////////
+//////////////// Variables ////////////////////////////
 
 // Starter values for defining generation options
 var hasLowerCase ;
@@ -126,12 +134,19 @@ const promptSpecialCharactersText = "Would you like to include special character
 
 ///////////////////////////////functions //////////////////////////
 
-// function to clear previus password
+// function to clear previus password brfore a new password generation
 function clearPreviousPassword(){
   validateSourceData = false;
   tempArray=[];
   passwordOutput="";
 }
+
+// Function for getting a random element from an array
+function getRandom(arr) {
+  
+  let randomChar=  Math.floor(Math.random() * arr.length);
+    return arr[randomChar];
+ }
 
 // Function to prompt user for password options
 function getPasswordOptions(promptText) {
@@ -139,12 +154,6 @@ let userSelection=prompt(promptText);
 return userSelection;
 }
 
-// Function for getting a random element from an array
-function getRandom(arr) {
-  
- let randomChar=  Math.floor(Math.random() * arr.length);
-   return arr[randomChar];
-}
 
 // Function to generate password with user input
 function generatePassword(passwordOutput) {
@@ -185,16 +194,6 @@ return passwordOutput;
 
 }
 
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector('#password');
-
-  passwordText.value = password;
-}
 
 
 // loop prompts for selecting data source
@@ -245,13 +244,21 @@ if(hasSpecialCharacter!=null){
 
 }
 
+
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector('#password');
+
+  passwordText.value = password;
+}
+
+
 ////////////////////////// buttons /////////////////////////
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-
-
-//console.log(passwordLength);
-//console.log(passwordOutput);
-//console.log(tempArray);
